@@ -1,0 +1,181 @@
+---
+import Hero from '../../components/Hero.astro';
+import ScrollProgress from '../../components/ScrollProgress.astro';
+import Layout from '../../layouts/Layout.astro';
+import heroImage from '../../assets/images/Team-Hero.png';
+import heroImageSM from '../../assets/images/Team-Hero-SM.png';
+import { getCollection } from 'astro:content';
+import CustomImage from '../../components/CustomImage.astro';
+import Icon from '../../components/Icon.astro';
+import type { CarouselImage } from '../../components/Carousel';
+import Carousel from '../../components/Carousel';
+import { getImage } from 'astro:assets';
+import ProjectCard from '../../components/ProjectCard.astro';
+import ContactUsSection from '../../components/ContactUsSection.astro';
+
+export async function getStaticPaths() {
+    const members = await getCollection('team');
+    return members.map((member: any) => ({
+        params: {
+            member: member.data.slug,
+        },
+        props: { member },
+    }));
+}
+
+const completedProjects = await getCollection('projects', ({ data }) => {
+    return data.completionYear !== null && data.completionYear?.trim() !== '';
+});
+
+let featuredProjectCarouselImages: CarouselImage[] = [];
+let featuredProjectCards = [];
+
+// Build featured project carousel image lists for both mobile and desktop
+for (let i = 0; i < 3; i++) {
+    let carouselImageMobile: CarouselImage = {} as CarouselImage;
+
+    let completedProjectsMobileImage = await getImage({
+        src: completedProjects[i].data.cardImageMobile,
+        height: 448,
+        width: 327,
+        format: 'webp',
+    });
+
+    if (completedProjects[i]) {
+        carouselImageMobile.image = { src: completedProjectsMobileImage.src };
+        carouselImageMobile.alt = completedProjects[i].data.cardImageAlt;
+        carouselImageMobile.height = completedProjectsMobileImage.attributes.height;
+        carouselImageMobile.width = completedProjectsMobileImage.attributes.width;
+        carouselImageMobile.href = `/projects/${completedProjects[i].data.slug}`;
+
+        featuredProjectCarouselImages.push(carouselImageMobile);
+        featuredProjectCards.push(completedProjects[i]);
+    }
+}
+
+const { member } = Astro.props;
+---
+
+<Layout
+    title=`${member.data.name} - Archytech ${member.data.role}`
+    description=`Meet ${member.data.name}, our ${member.data.role} here at Archytech!`
+    robots={false}
+>
+    <Hero heroBackgroundImgSrcList={[heroImageSM, heroImage]} alt=`Team Member Hero Image`>
+        <div class='hero'>
+            <h1 class='hero-h1'>Team</h1>
+            <p class='hero-paragraph'>The foremost marketplace for designing and constructing.</p>
+        </div>
+        <div
+            class='absolute left-0 top-0 z-10 h-full w-full bg-brand-black bg-opacity-50 bg-blend-luminosity'
+        >
+        </div>
+    </Hero>
+
+    <main class='container space-y-10 py-10 md:space-y-20 md:py-20'>
+        <section class='flex flex-col space-y-6 lg:flex-row lg:space-x-8'>
+            <div
+                class='flex w-full flex-col space-y-6 place-self-center md:w-fit lg:w-1/2 lg:place-self-auto'
+            >
+                <div class='flex flex-col items-start space-y-2 md:hidden'>
+                    <h2 class='block text-left text-2xl font-bold text-brand-black'>
+                        {member.data.name}
+                    </h2>
+                    <p class='block text-left text-lg font-medium text-brand-gray'>
+                        {member.data.role.toUpperCase()}
+                    </p>
+                </div>
+                <CustomImage
+                    mobileImgUrl={member.data.profileImageMobile}
+                    desktopImgUrl={member.data.profileImageDesktop}
+                    imageSizes={[
+                        [327, 637],
+                        [518, 637],
+                    ]}
+                    alt=`${member.data.name} Profile Image`
+                    imgClassList='w-full md:w-fit'
+                />
+                <div class='flex items-center space-x-4'>
+                    <Icon
+                        href=`tel:${member.data.phoneNumber.replace(/-/g,'')}`
+                        icon='icon-[mage--phone]'
+                        label=`${member.data.name} phone number link`
+                        iconColor='text-white'
+                        bgColor='bg-brand-black'
+                    />
+                    <p class='text-brand-black'>{member.data.phoneNumber}</p>
+                </div>
+                <div class='flex items-center space-x-4'>
+                    <Icon
+                        href=`mailto:${member.data.email}`
+                        icon='icon-[eva--email-outline]'
+                        label=`${member.data.name} email link`
+                        iconColor='text-white'
+                        bgColor='bg-brand-black'
+                    />
+                    <p class='text-brand-black'>{member.data.email}</p>
+                </div>
+                <div class='flex items-center space-x-4'>
+                    <Icon
+                        href=`https://maps.google.com/?q=${member.data.location}`
+                        icon='icon-[carbon--location]'
+                        label=`${member.data.name} location link`
+                        iconColor='text-white'
+                        bgColor='bg-brand-black'
+                    />
+                    <p class='text-brand-black'>{member.data.location}</p>
+                </div>
+            </div>
+            <div class='flex flex-col space-y-6 lg:w-1/2'>
+                <div class='hidden flex-col items-start space-y-2 lg:flex'>
+                    <h2 class='block text-left text-2xl font-bold text-brand-black'>
+                        {member.data.name}
+                    </h2>
+                    <p class='block text-left text-lg font-medium text-brand-gray'>
+                        {member.data.role.toUpperCase()}
+                    </p>
+                </div>
+                <p class='leading-loose text-brand-black'>
+                    {member.data.description1}
+                </p>
+                <p class='leading-loose text-brand-black'>
+                    {member.data.description2}
+                </p>
+                <p class='leading-loose text-brand-black'>
+                    {member.data.description3}
+                </p>
+            </div>
+        </section>
+        <section class='flex flex-col'>
+            <h2
+                class='relative mb-10 place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+            >
+                Featured Projects
+                <span
+                    class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[20%] after:bg-brand-black'
+                ></span>
+            </h2>
+            <div class='block sm:hidden'>
+                <Carousel images={{mobileImages: featuredProjectCarouselImages}} client:load />
+            </div>
+            <div class='hidden grid-cols-3 gap-x-8 sm:grid'>
+                {
+                    featuredProjectCards.map((project: any) => {
+                        return (
+                            <ProjectCard
+                                projectName={project.data.projectName}
+                                projectSlug={project.data.slug}
+                                projectCategory={project.data.category}
+                                projectImageMobileSrc={project.data.cardImageMobile}
+                                projectImageDesktopSrc={project.data.cardImageDesktop}
+                                projectImageAlt={project.data.cardImageAlt}
+                            />
+                        );
+                    })
+                }
+            </div>
+        </section>
+    </main>
+    <ContactUsSection />
+    <script src='../../scripts/projects.ts'></script>
+</Layout>

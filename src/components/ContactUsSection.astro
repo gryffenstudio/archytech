@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import contactUsSectionImg from '../assets/images/Contact-Us-Section-Img.png';
+import contactUsSectionImgSM from '../assets/images/Contact-Us-Section-Img-SM.png';
+---
+
+<a
+    class='group relative flex h-[17rem] w-full flex-col justify-center overflow-hidden px-4 py-8 no-underline lg:px-20'
+    href='/contact'
+>
+    <div>
+        <!-- Mobile Image -->
+        <Image
+            class='absolute inset-0 z-0 block h-full w-full transform object-cover object-center transition-all duration-1000 group-hover:scale-110 md:hidden'
+            src={contactUsSectionImgSM}
+            alt='Mobile Newsletter Image'
+        />
+        <!-- Desktop Image -->
+        <Image
+            class='absolute inset-0 z-0 hidden h-full w-full transform object-cover object-center transition-all duration-1000 group-hover:scale-110 md:block'
+            src={contactUsSectionImg}
+            alt='Desktop Newsletter Image'
+        />
+    </div>
+
+    <div class='z-20 flex flex-col items-start justify-center space-y-8'>
+        <h2 class='relative text-start text-3xl font-semibold tracking-wide text-white'>
+            CONTACT US
+            <span
+                class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[70px] after:bg-white'
+            ></span>
+        </h2>
+    </div>
+    <span class='absolute inset-0 left-0 z-10 bg-brand-black bg-opacity-50 bg-blend-luminosity'
+    ></span>
+</a>

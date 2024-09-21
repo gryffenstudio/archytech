@@ -1,0 +1,145 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import ScrollProgress from '../../components/ScrollProgress.astro';
+import CustomImage from '../../components/CustomImage.astro';
+import Carousel, { type CarouselImage } from '../../components/Carousel';
+import ContactUsSection from '../../components/ContactUsSection.astro';
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+    return projects.map((project: any) => ({
+        params: {
+            project: project.data.slug,
+        },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout
+    title=`${project.data.projectName} | Archytech ${project.data.category} Projects`
+    description='Successful Projects Completed and In Progress for Archytech'
+    robots={false}
+>
+    <Hero
+        heroBackgroundImgSrcList={[project.data.heroImageMobile, project.data.heroImageDesktop]}
+        alt={project.data.heroImageAlt}
+    >
+        <div class='hero'>
+            <h1 class='hero-h1'>
+                {project.data.projectName}
+            </h1>
+            <div class='block h-full justify-between space-y-8 lg:flex'>
+                <div class='relative flex flex-col space-y-2 text-white xl:hidden'>
+                    <p class='font-bold'>{project.data.location.toUpperCase()}</p>
+                    <p class='font-bold'>
+                        SIZE: <span class='font-normal'>{project.data.buildingSize}</span>
+                    </p>
+                    <p class='font-bold'>
+                        COMPLETION YEAR:
+                        <span class='font-normal'
+                            >{
+                                project.data.completionYear !== null &&
+                                project.data.completionYear?.trim() !== ''
+                                    ? project.data.completionYear
+                                    : 'IN PROGEESS'
+                            }
+                        </span>
+                    </p>
+                </div>
+                <div
+                    class='absolute bottom-10 right-20 hidden flex-col space-y-2 place-self-end text-white xl:flex'
+                >
+                    <p class='font-bold'>{project.data.location.toUpperCase()}</p>
+                    <p class='font-bold'>
+                        SIZE: <span class='font-normal'>{project.data.buildingSize}</span>
+                    </p>
+                    <p class='font-bold'>
+                        YEAR: <span class='font-normal'>{project.data.completionYear}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </Hero>
+
+    <main class='container'>
+        <section
+            class='flex flex-col items-start justify-center space-y-10 py-8 md:flex-row md:justify-between md:space-y-0 lg:py-20'
+        >
+            <div class='relative flex flex-col space-y-10 md:w-1/2'>
+                <h2
+                    class='relative place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+                >
+                    Design Brief
+                    <span
+                        class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[40%] after:bg-brand-black'
+                    ></span>
+                </h2>
+                <p class='leading-loose text-brand-black md:w-3/4'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
+                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <CustomImage
+                mobileImgUrl={project.data.designBriefImageMobile}
+                desktopImgUrl={project.data.designBriefImageDesktop}
+                imageSizes={[
+                    [327, 327],
+                    [598, 681],
+                ]}
+                alt={project.data.designBriefImageAlt}
+                classList='place-self-auto flex justify-center w-full md:w-1/2 md:block md:justify-normal'
+                imgClassList='min-w-full h-auto max-h-[800px]'
+            />
+        </section>
+        <section class='flex w-full flex-col place-content-center py-8'>
+            <h2
+                class='relative mb-8 place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+            >
+                Interior
+                <span
+                    class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[40%] after:bg-brand-black'
+                ></span>
+            </h2>
+            <Carousel
+                images={{
+                    mobileImages: project.data.interiorImagesMobile,
+                    desktopImages: project.data.interiorImagesDesktop,
+                }}
+                client:load
+            />
+        </section>
+        <section class='flex w-full flex-col place-content-center py-8'>
+            <h2
+                class='relative mb-8 place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+            >
+                Exterior
+                <span
+                    class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[40%] after:bg-brand-black'
+                ></span>
+            </h2>
+            <Carousel
+                images={{
+                    mobileImages: project.data.exteriorImagesMobile,
+                    desktopImages: project.data.exteriorImagesDesktop,
+                }}
+                client:load
+            />
+        </section>
+    </main>
+    <ContactUsSection />
+</Layout>

@@ -1,0 +1,116 @@
+---
+import { getPost, getPosts, urlFor, type Post } from '../../../utils/sanity';
+import type { StructuredDataInput } from '../../../utils/structuredData';
+import siteData from '../../../data/siteData.json';
+import Layout from '../../../layouts/Layout.astro';
+import Hero from '../../../components/Hero.astro';
+import { Image } from 'astro:assets';
+import { formatDate } from '../../../utils/dateUtils';
+import PortableText from '../../../components/PortableText.astro';
+
+export async function getStaticPaths() {
+    const posts = await getPosts();
+    return posts.map((post: Post) => ({
+        params: { slug: post.slug.current, category: post.category.title.toLowerCase() },
+    }));
+}
+
+const { slug } = Astro.params;
+
+const post = await getPost(slug);
+
+const structuredData: StructuredDataInput[] = [
+    {
+        type: 'BlogPosting',
+        data: {
+            url: Astro.url,
+            headline: post.title,
+            description: post.description,
+            datePublished: post._createdAt,
+            dateModified: post._createdAt,
+            author: {
+                '@type': 'Person',
+                name: post.author.name,
+            },
+            publisher: {
+                '@id': siteData.organizationId,
+            },
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': Astro.url,
+            },
+            image: urlFor(post.cardImageMobile)?.url() ?? '',
+        },
+    } satisfies StructuredDataInput,
+    {
+        type: 'Organization',
+        data: {
+            '@id': siteData.organizationId,
+            name: siteData.organizationName,
+            url: siteData.url,
+            logo: siteData.logo.src,
+        },
+    } satisfies StructuredDataInput,
+    {
+        type: 'BreadcrumbList',
+        data: {
+            id: `${siteData.url}/blog/${post.category.slug.current}/#breadcrumb`,
+            items: [
+                { name: 'Home', url: siteData.url },
+                { name: 'Blog', url: `${siteData.url}/blog` },
+                { name: 'Category', url: `${siteData.url}/blog/${post.category.slug.current}` },
+                { name: post.title, url: Astro.url },
+            ],
+        },
+    } satisfies StructuredDataInput,
+];
+---
+
+<Layout
+    title={post.title}
+    description={post.description}
+    robots={false}
+    image={{ src: urlFor(post.cardImageDesktop)?.url(), alt: `${post.title} image` }}
+    structuredData={structuredData}
+>
+    <Hero
+        heroBackgroundImgSrcList={[
+            urlFor(post.heroImageMobile)?.url() ?? urlFor(post.cardImageMobile)?.url(),
+            urlFor(post.heroImageDesktop)?.url() ?? urlFor(post.cardImageDesktop)?.url(),
+        ]}
+        alt='Team Hero Image'
+    >
+        <div class='hero'>
+            <h1 class='hero-h1 tracking-wide lg:text-6xl'>
+                {post.title}
+            </h1>
+            <p class='hero-paragraph'>{post.description}</p>
+        </div>
+        <div
+            class='absolute left-0 top-0 z-10 h-full w-full bg-brand-black bg-opacity-50 bg-blend-luminosity'
+        >
+        </div>
+    </Hero>
+    <article class='container py-8 leading-6 lg:py-16'>
+        <div class='mb-8 flex items-center space-x-4'>
+            <a
+                href={post.author.websiteLink}
+                class=`flex items-center justify-center h-[70px] w-[70px] rounded-full hover:opacity-50`
+                aria-label='Author Website/Webpage Link'
+            >
+                <Image
+                    src={urlFor(post.author.image)?.url() ?? ''}
+                    alt='Author Image'
+                    height={600}
+                    width={600}
+                    class='rounded-full'
+                />
+            </a>
+            <div class='flex flex-col space-y-2'>
+                <span class='text-xl font-bold md:text-2xl'>{post.author.name}</span>
+                <span class='md:text-lg'>Published: {formatDate(post._createdAt)}</span>
+            </div>
+        </div>
+        <PortableText portableText={post.body} />
+    </article>
+</Layout>

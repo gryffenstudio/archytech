@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import { Image } from 'astro:assets';
+import ScrollProgress from '../components/ScrollProgress.astro';
+import HomeSection from '../components/HomeSection.astro';
+import section1ImgSM from '../assets/images/Section-1-Img-SM.png';
+import section1Img from '../assets/images/Section-1-Img.png';
+import section2ImgSM from '../assets/images/Section-2-Img-SM.png';
+import section2Img from '../assets/images/Section-2-Img.png';
+import section3ImgSM from '../assets/images/Section-3-Img-SM.png';
+import section3Img from '../assets/images/Section-3-Img.png';
+import section4ImgSM from '../assets/images/Section-4-Img-SM.png';
+import section4Img from '../assets/images/Section-4-Img.png';
+import heroImage from '../assets/images/Landing-Hero.png';
+import heroImageSM from '../assets/images/Landing-Hero-SM.png';
+import newsletterSectionImage from '../assets/images/Newsletter-Section-Image.png';
+import newsletterSectionImageSM from '../assets/images/Newsletter-Section-Image-SM.png';
+import Carousel from '../components/Carousel';
+---
+
+<Layout title='Landing - Archytech' description='Build with Archytech' robots={false}>
+    <Hero heroBackgroundImgSrcList={[heroImageSM, heroImage]} alt='Home Page Hero Image'>
+        <div class='hero'>
+            <p class='text-sm text-white md:text-xl lg:font-medium'>WE BELIEVE IN</p>
+            <h1 class='hero-h1 tracking-wide'>Great Architecture</h1>
+            <p class='hero-paragraph'>
+                The foremost marketplace for designing and constructing houses globally,
+                distinguished for its unparalleled reliability and trustworthiness.
+            </p>
+        </div>
+        <div
+            class='absolute left-0 top-0 z-10 h-full w-full bg-brand-black bg-opacity-50 bg-blend-luminosity'
+        >
+        </div>
+    </Hero>
+    <main class='w-full items-center justify-center'>
+        <HomeSection
+            sectionNum={1}
+            sectionHeader='RESEARCH'
+            sectionDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrudexercitation ullamco laboris.'
+            sectionProgress='bottom-[75%]'
+            imageSrc={[section1ImgSM, section1Img]}
+        />
+        <HomeSection
+            sectionNum={2}
+            sectionHeader='DESIGN + DOCUMENTATION'
+            sectionDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
+            sectionProgress='bottom-[50%]'
+            imageSrc={[section2ImgSM, section2Img]}
+        />
+        <HomeSection
+            sectionNum={3}
+            sectionHeader='PRICING'
+            sectionDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
+            sectionProgress='bottom-[25%]'
+            imageSrc={[section3ImgSM, section3Img]}
+        />
+        <HomeSection
+            sectionNum={4}
+            sectionHeader='CONSTRUCTION'
+            sectionDescription='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
+            sectionProgress='bottom-[0%]'
+            imageSrc={[section4ImgSM, section4Img]}
+        />
+        <section class='container py-8 lg:py-24'>
+            <Carousel
+                client:load
+                testimonials={[
+                    {
+                        mobileImage: { image: heroImageSM.src, alt: 'Testimonial 1' },
+                        desktopImage: { image: heroImage.src, alt: 'Testimonial 1' },
+                        quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolororis.',
+                        clientName: 'T & H Builders // Boulder, CO',
+                    },
+                    {
+                        mobileImage: { image: section1ImgSM.src, alt: 'Testimonial 2' },
+                        desktopImage: { image: section1Img.src, alt: 'Testimonial 1' },
+                        quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolororis.',
+                        clientName: 'Knight Studios LLC // Boulder, CO',
+                    },
+                    {
+                        mobileImage: { image: section2ImgSM.src, alt: 'Testimonial 3' },
+                        desktopImage: { image: section2Img.src, alt: 'Testimonial 1' },
+                        quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolororis.',
+                        clientName: 'Mecha Engineering Firm // Longmont, CO',
+                    },
+                    {
+                        mobileImage: { image: section3ImgSM.src, alt: 'Testimonial 3' },
+                        desktopImage: { image: section3Img.src, alt: 'Testimonial 1' },
+                        quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolororis.',
+                        clientName: 'FOMO Trading LLC // Denver, CO',
+                    },
+                    {
+                        mobileImage: { image: section4ImgSM.src, alt: 'Testimonial 3' },
+                        desktopImage: { image: section4Img.src, alt: 'Testimonial 1' },
+                        quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolororis.',
+                        clientName: 'Next Level Construction // Loveland, CO',
+                    },
+                ]}
+            />
+        </section>
+        <section
+            class='relative flex w-full flex-col items-center justify-center bg-brand-black px-4 py-8 bg-blend-luminosity'
+        >
+            <!-- Mobile Image -->
+            <Image
+                class='absolute inset-0 z-0 block h-full w-full object-cover object-center md:hidden'
+                src={newsletterSectionImageSM}
+                alt='Mobile Newsletter Image'
+                width='375'
+                height='359'
+            />
+            <!-- Desktop Image -->
+            <Image
+                class='absolute inset-0 z-0 hidden h-full w-full object-cover object-center md:block'
+                src={newsletterSectionImage}
+                alt='Desktop Newsletter Image'
+                width='1440'
+                height='272'
+            />
+            <div class='z-10 flex flex-col items-center justify-center space-y-16'>
+                <h2 class='relative text-start text-3xl font-semibold tracking-wide text-white'>
+                    STAY UP TO DATE WITH OUR NEWSLETTER
+                    <span
+                        class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[70px] after:rounded-full after:bg-white'
+                    ></span>
+                </h2>
+                <form
+                    class='mt-4 flex w-full flex-col items-center'
+                    name='newsletterForm'
+                    id='newsletterForm'
+                    data-netlify='true'
+                    method='post'
+                >
+                    <input
+                        class='focus:border-brand-red block h-12 w-[327px] rounded-lg border border-brand-gray p-2.5 text-sm text-black focus:outline-none focus:ring-0 lg:w-[355px]'
+                        type='email'
+                        id='email'
+                        name='email'
+                        autocomplete='email'
+                        placeholder='Enter your email'
+                        required
+                    />
+                    <button
+                        type='submit'
+                        id='subscribe-button'
+                        class='font-visby-medium mt-4 h-12 w-[327px] rounded-md bg-brand-purple py-2 text-white hover:bg-opacity-80 lg:w-[355px]'
+                    >
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+</Layout>

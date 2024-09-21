@@ -1,0 +1,173 @@
+---
+import Hero from '../components/Hero.astro';
+import Layout from '../layouts/Layout.astro';
+import heroImage from '../assets/images/Contact-Us-Hero.png';
+import heroImageSM from '../assets/images/Contact-Us-Hero-SM.png';
+import { Image } from 'astro:assets';
+import Icon from '../components/Icon.astro';
+---
+
+<Layout
+    title='Contact Us - Archytech'
+    description="Contact Us Today and Let's Build Together!"
+    robots={false}
+    showFooter={false}
+>
+    <main
+        class='relative flex min-h-lvh w-full items-center bg-brand-black pb-10 pt-28 bg-blend-luminosity md:pb-0 md:pt-28'
+    >
+        <!-- Mobile Image -->
+        <Image
+            class='absolute inset-0 block h-full w-full object-cover object-center md:hidden'
+            src={heroImageSM}
+            alt='Contact Us Background Image'
+            width='375'
+            height='812'
+        />
+
+        <!-- Desktop Image -->
+        <Image
+            class='absolute inset-0 hidden h-full w-full object-cover object-center md:block'
+            src={heroImage}
+            alt='Contact Us Background Image'
+            width='1440'
+            height='1024'
+        />
+        <div
+            class='absolute left-0 top-0 z-10 h-full w-full bg-brand-black bg-opacity-90 bg-blend-luminosity'
+        >
+        </div>
+        <div class='container z-20 mx-auto flex flex-col md:flex-row'>
+            <section class='container z-20 mx-auto flex flex-col md:w-1/2'>
+                <div class='flex flex-col justify-center space-y-8'>
+                    <h2
+                        class='relative place-self-start text-start text-2xl font-semibold tracking-wide text-white lg:text-3xl'
+                    >
+                        CONTACT US
+                        <span
+                            class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[30%] after:bg-white'
+                        ></span>
+                    </h2>
+                    <p class='text-white'>
+                        Contact us and let us know about your project, or find out more about our
+                        services.
+                    </p>
+                    <div class='flex items-center space-x-4'>
+                        <Icon
+                            href=`tel:000000000`
+                            icon='icon-[mage--phone]'
+                            label=`Archytech phone number link`
+                            iconColor='text-brand-black'
+                            bgColor='bg-white'
+                        />
+                        <p class='text-white'>000-000-0000</p>
+                    </div>
+                    <div class='flex items-center space-x-4'>
+                        <Icon
+                            href=`mailto:mail@archytech.design`
+                            icon='icon-[eva--email-outline]'
+                            label=`Archytech email link`
+                            iconColor='text-brand-black'
+                            bgColor='bg-white'
+                        />
+                        <p class='text-white'>mail@archytech.design</p>
+                    </div>
+                    <div class='flex space-x-4'>
+                        <Icon
+                            href=`https://maps.google.com/?q=0000+Design+Drive+Denver+Colorado`
+                            icon='icon-[carbon--location]'
+                            label=`Archytech location link`
+                            iconColor='text-brand-black'
+                            bgColor='bg-white'
+                        />
+                        <div class='space-y-2'>
+                            <p class='text-white'>ArchyTech Design</p>
+                            <p class='text-white'>0000 Design Drive</p>
+                            <p class='text-white'>Denver, Colorado</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class='container z-20 mx-auto mt-12 flex flex-col md:mt-0 xl:w-1/2'>
+                <form class='space-y-6' data-netlify='true' method='post' id='contact-form'>
+                    <div class='relative'>
+                        <label class='absolute left-0 text-sm text-white' for='name'> Name </label>
+                        <input
+                            class='relative mt-6 w-full appearance-none rounded-none border-b-2 border-b-white bg-transparent py-2 text-white outline-none focus:border-0 focus:border-b-2 focus:border-brand-purple focus:outline-none focus:ring-0 active:border-brand-purple'
+                            type='text'
+                            id='name'
+                            name='name'
+                            required
+                        />
+                    </div>
+                    <div class='relative'>
+                        <label class='absolute left-0 text-sm text-white' for='phoneNumber'>
+                            Phone Number
+                        </label>
+                        <input
+                            class='relative mt-6 w-full appearance-none rounded-none border-b-2 border-b-white bg-transparent py-2 text-white outline-none focus:border-0 focus:border-b-2 focus:border-brand-purple focus:outline-none focus:ring-0 active:border-brand-purple'
+                            type='tel'
+                            id='phoneNumber'
+                            name='phoneNumber'
+                            required
+                        />
+                    </div>
+                    <div class='relative'>
+                        <label class='absolute left-0 text-sm text-white' for='email'>
+                            Email Address
+                        </label>
+                        <input
+                            class='relative mt-6 w-full appearance-none rounded-none border-b-2 border-b-white bg-transparent py-2 text-white outline-none focus:border-0 focus:border-b-2 focus:border-brand-purple focus:outline-none focus:ring-0 active:border-brand-purple'
+                            type='email'
+                            id='email'
+                            name='email'
+                            required
+                        />
+                    </div>
+                    <div class='relative'>
+                        <label class='absolute left-0 text-sm text-white' for='message'>
+                            Message
+                        </label>
+                        <textarea
+                            class='relative mt-8 h-16 w-full appearance-none rounded-none border-b-2 border-b-white bg-transparent text-white outline-none focus:border-0 focus:border-b-2 focus:border-brand-purple focus:outline-none focus:ring-0 active:border-brand-purple'
+                            id='message'
+                            name='message'
+                            required></textarea>
+                    </div>
+                    <button
+                        type='submit'
+                        id='submit-contact-form-button'
+                        class='bg-brand-red font-visby-medium mt-4 rounded-lg border-[1px] px-12 py-2 text-white hover:bg-opacity-80 disabled:cursor-not-allowed disabled:bg-opacity-50'
+                        disabled
+                    >
+                        Submit
+                    </button>
+                </form>
+                <div class='relative z-20 mt-16 flex space-x-6 md:place-self-end'>
+                    <Icon
+                        href='https://www.instagram.com'
+                        icon='icon-[ri--instagram-line]'
+                        label='Instagram Link'
+                        iconColor='text-brand-black'
+                        bgColor='bg-white'
+                    />
+                    <Icon
+                        href='https://www.facebook.com'
+                        icon='icon-[ri--facebook-fill]'
+                        label='Facebook Link'
+                        iconColor='text-brand-black'
+                        bgColor='bg-white'
+                    />
+                    <Icon
+                        href='https://www.linkedin.com'
+                        icon='icon-[ri--linkedin-fill]'
+                        label='LinkedIn Link'
+                        iconColor='text-brand-black'
+                        bgColor='bg-white'
+                    />
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src='../scripts/contactForm.ts'></script>
+</Layout>

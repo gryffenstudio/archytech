@@ -1,0 +1,21 @@
+{
+    "title": "Landing - Archytech",
+    "description": "Build with Archytech",
+    "logo": {
+        "src": "https://archytech.netlify.app/ArchytechLogo.svg",
+        "alt": "Archytech Logo",
+        "width": "43",
+        "height": "51"
+    },
+    "image":{
+        "src": "https://archytech.netlify.app/Landing-Hero.png",
+        "alt": "Archytech Home Page Image",
+        "width": "1200",
+        "height": "600"
+    },
+    "organizationName": "Archytech",
+    "url": "https://archytech.netlify.app",
+    "websiteId": "https://archytech.netlify.app/#website",
+    "organizationId": "https://archytech.netlify.app/#organization",
+    "breadcrumbId": "https://archytech.netlify.app/#breadcrumb"
+}

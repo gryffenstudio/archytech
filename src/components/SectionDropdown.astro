@@ -1,0 +1,30 @@
+---
+interface Props {
+    header: string;
+    bodyText: string;
+}
+
+const { header, bodyText } = Astro.props;
+---
+
+<div class='relative flex w-full flex-col md:w-1/2'>
+    <div class='mb-2 flex items-center justify-between'>
+        <h3 class='text-xl font-bold'>{header}</h3>
+        <button
+            aria-label=`${header}-dropdown-button`
+            class='dropdown-button flex h-10 w-10 items-center justify-center'
+        >
+            <span
+                id=`${header}-dropdown`
+                class='icon-[iconamoon--arrow-down-2-thin] size-full transform text-brand-black transition-all duration-700'
+            ></span>
+        </button>
+    </div>
+    <div
+        id=`${header}-content`
+        class='max-h-0 transform overflow-hidden transition-all duration-700 ease-in-out'
+    >
+        <p class='text-brand-black'>{bodyText}</p>
+    </div>
+    <span class='after:absolute after:block after:h-[3px] after:w-full after:bg-brand-black'></span>
+</div>

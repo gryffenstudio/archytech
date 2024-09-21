@@ -1,0 +1,74 @@
+{
+    "projectName": "CABIN HOUSE",
+    "slug": "cabin-house-copy-11",
+    "category": "commercial",
+    "location": "Boulder, Colorado",
+    "buildingSize": "4,000 SF",
+    "completionYear": "2018",
+    "designBrief": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "heroImageMobile": "../../assets/images/Project-Hero-Img-Cabin-SM.png",
+    "heroImageDesktop": "../../assets/images/Project-Hero-Img-Cabin.png",
+    "heroImageAlt": "Cabin Project Hero Image",
+    "cardImageMobile": "../../assets/images/Cabin-House-Project-SM.png",
+    "cardImageDesktop": "../../assets/images/Cabin-House-Project.png",
+    "cardImageAlt": "Cabin Project Project Card Image",
+    "designBriefImageMobile": "../../assets/images/Project-Design-Brief-Img-Cabin-SM.png",
+    "designBriefImageDesktop": "../../assets/images/Project-Design-Brief-Img-Cabin.png",
+    "designBriefImageAlt": "Cabin Project Design Brief Image",
+    "interiorImagesMobile": [
+        {
+            "image": "../../assets/images/Cabin-Project-Interior-Image-1-SM.png",
+            "alt": "Cabin Project Interior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Interior-Image-1-SM.png",
+            "alt": "Cabin Project Interior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Interior-Image-1-SM.png",
+            "alt": "Cabin Project Interior Design Image 2"
+        }
+    ],
+    "interiorImagesDesktop": [
+        {
+            "image": "../../assets/images/Cabin-Project-Interior-Image-1.png",
+            "alt": "Cabin Project Interior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Interior-Image-1.png",
+            "alt": "Cabin Project Interior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Interior-Image-1.png",
+            "alt": "Cabin Project Interior Design Image 2"
+        }
+    ],
+    "exteriorImagesMobile": [
+        {
+            "image": "../../assets/images/Cabin-Project-Exterior-Image-1-SM.png",
+            "alt": "Cabin Project Exterior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Exterior-Image-1-SM.png",
+            "alt": "Cabin Project Exterior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Exterior-Image-1-SM.png",
+            "alt": "Cabin Project Exterior Design Image 2"
+        }
+    ],
+    "exteriorImagesDesktop": [
+        {
+            "image": "../../assets/images/Cabin-Project-Exterior-Image-1.png",
+            "alt": "Cabin Project Exterior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Exterior-Image-1.png",
+            "alt": "Cabin Project Exterior Design Image"
+        },
+        {
+            "image": "../../assets/images/Cabin-Project-Exterior-Image-1.png",
+            "alt": "Cabin Project Exterior Design Image 2"
+        }
+    ]
+}

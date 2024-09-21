@@ -1,0 +1,87 @@
+---
+import Icon from './Icon.astro';
+---
+
+<footer class='bottom-0 flex flex-col space-y-6 px-6 py-8 lg:px-20'>
+    <div
+        class='flex w-full flex-col space-y-6 place-self-center md:flex-row md:items-center md:justify-between md:space-y-0'
+    >
+        <a class='h-[35px] w-[35px] lg:h-[51px] lg:w-[43px]' href='/' aria-label='Home'>
+            <svg
+                id='logo'
+                class='h-[35px] w-[35px] fill-brand-black lg:h-[51px] lg:w-[43px]'
+                viewBox='0 0 43 51'
+                xmlns='http://www.w3.org/2000/svg'
+            >
+                <path
+                    d='M5.08594 51H1.99219L19.3125 3H22.6875L40.0078 51H36.9141L21.1172 6.77344H20.8828L5.08594 51ZM9.46875 32.9297H32.5313V35.6484H9.46875V32.9297Z'
+                ></path>
+                <rect x='19' y='3' width='4' height='48'></rect>
+                <rect x='33' width='4' height='24' transform='rotate(90 33 0)'></rect>
+            </svg>
+        </a>
+        <div class='flex space-x-6 text-sm md:space-x-16'>
+            <a
+                href='/studio'
+                class='font-bold text-brand-black no-underline hover:text-brand-gray hover:opacity-50'
+                >Studio</a
+            >
+            <a
+                href='/team'
+                class='font-bold text-brand-black no-underline hover:text-brand-gray hover:opacity-50'
+                >Team</a
+            >
+            <a
+                href='/projects'
+                class='font-bold text-brand-black no-underline hover:text-brand-gray hover:opacity-50'
+                >Projects</a
+            >
+            <a
+                href='/blog'
+                class='font-bold text-brand-black no-underline hover:text-brand-gray hover:opacity-50'
+                >Blog</a
+            >
+            <a
+                href='/contact'
+                class='font-bold text-brand-black no-underline hover:text-brand-gray hover:opacity-50'
+                >Contact</a
+            >
+        </div>
+        <div class='flex space-x-2'>
+            <Icon
+                href='https://www.instagram.com'
+                icon='icon-[ri--instagram-line]'
+                label='Instagram Link'
+                iconColor='text-white'
+                bgColor='bg-brand-black'
+            />
+            <Icon
+                href='https://www.facebook.com'
+                icon='icon-[ri--facebook-fill]'
+                label='Facebook Link'
+                iconColor='text-white'
+                bgColor='bg-brand-black'
+            />
+            <Icon
+                href='https://www.linkedin.com'
+                icon='icon-[ri--linkedin-fill]'
+                label='LinkedIn Link'
+                iconColor='text-white'
+                bgColor='bg-brand-black'
+            />
+        </div>
+    </div>
+    <span class='w-full border-b-[1px] border-solid border-brand-black'></span>
+    <div class='flex space-x-6 text-sm md:justify-center md:space-x-16'>
+        <a
+            href='/terms'
+            class='font-bold text-brand-black no-underline hover:text-brand-gray hover:opacity-50'
+            >Terms</a
+        >
+        <a
+            href='/privacy'
+            class='font-bold text-brand-black no-underline hover:text-brand-gray hover:opacity-50'
+            >Privacy</a
+        >
+    </div>
+</footer>

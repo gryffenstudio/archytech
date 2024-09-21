@@ -1,0 +1,62 @@
+---
+import Hero from '../../components/Hero.astro';
+import ScrollProgress from '../../components/ScrollProgress.astro';
+import Layout from '../../layouts/Layout.astro';
+import heroImage from '../../assets/images/Projects-Hero.png';
+import heroImageSM from '../../assets/images/Projects-Hero-SM.png';
+import ProjectCard from '../../components/ProjectCard.astro';
+import ContactUsSection from '../../components/ContactUsSection.astro';
+import { getCollection } from 'astro:content';
+import FilterButton from '../../components/FilterButton.astro';
+
+const projects = await getCollection('projects');
+---
+
+<Layout
+    title='Projects - Archytech'
+    description='Successful Projects Completed and In Progress for Archytech'
+    robots={false}
+>
+    <Hero heroBackgroundImgSrcList={[heroImageSM, heroImage]} alt='Projects Hero Image'>
+        <div class='hero'>
+            <h1 class='hero-h1'>Projects</h1>
+            <p class='hero-paragraph'>The foremost marketplace for designing and constructing.</p>
+        </div>
+        <div
+            class='absolute left-0 top-0 z-10 h-full w-full bg-brand-black bg-opacity-50 bg-blend-luminosity'
+        >
+        </div>
+    </Hero>
+    <main class='container flex flex-col py-8 lg:py-16'>
+        <div>
+            <section
+                class='mb-8 flex w-full flex-col space-y-4 lg:flex-row lg:space-x-8 lg:space-y-0'
+            >
+                <FilterButton id='show-all' buttonText='SHOW ALL' />
+                <FilterButton id='residential' buttonText='RESIDENTIAL' />
+                <FilterButton id='commercial' buttonText='COMMERCIAL' />
+                <FilterButton id='in-progress' buttonText='IN PROGRESS' />
+            </section>
+            <section
+                class='grid grid-cols-1 justify-items-center gap-y-6 md:grid-cols-2 md:gap-x-24 lg:grid-cols-3 lg:gap-y-10'
+            >
+                {
+                    projects.map((project: any) => {
+                        return (
+                            <ProjectCard
+                                projectName={project.data.projectName}
+                                projectSlug={project.data.slug}
+                                projectCategory={project.data.category}
+                                projectImageMobileSrc={project.data.cardImageMobile}
+                                projectImageDesktopSrc={project.data.cardImageDesktop}
+                                projectImageAlt={project.data.cardImageAlt}
+                            />
+                        );
+                    })
+                }
+            </section>
+        </div>
+    </main>
+    <ContactUsSection />
+    <script src='../../scripts/projects.ts'></script>
+</Layout>

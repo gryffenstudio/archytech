@@ -1,0 +1,31 @@
+---
+import CustomImage from '../components/CustomImage.astro';
+
+interface Props {
+    name: string;
+    role: string;
+    slug: string;
+    cardImageMobile: ImageMetadata;
+    cardImageDesktop: ImageMetadata;
+}
+
+const { name, role, slug, cardImageMobile, cardImageDesktop } = Astro.props;
+---
+
+<div class='flex w-full flex-col items-center justify-center'>
+    <a href=`/team/${slug}` class='group mb-4 w-full'>
+        <CustomImage
+            mobileImgUrl={cardImageMobile}
+            desktopImgUrl={cardImageDesktop}
+            imageSizes={[
+                [360, 360],
+                [360, 360],
+            ]}
+            alt=`${name} Image`
+            classList='group-hover:opacity-75'
+            imgClassList='w-full'
+        />
+    </a>
+    <p class='mb-1 text-xl font-bold text-brand-black'>{name}</p>
+    <p class='text-brand-black'>{role}</p>
+</div>

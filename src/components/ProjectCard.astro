@@ -1,0 +1,46 @@
+---
+import CustomImage from './CustomImage.astro';
+
+interface Props {
+    projectName: string;
+    projectSlug: string;
+    projectCategory: string;
+    projectImageMobileSrc: ImageMetadata;
+    projectImageDesktopSrc: ImageMetadata;
+    projectImageAlt: string;
+}
+
+const {
+    projectName,
+    projectSlug,
+    projectCategory,
+    projectImageMobileSrc,
+    projectImageDesktopSrc,
+    projectImageAlt,
+} = Astro.props;
+---
+
+<a
+    class=`relative w-full hover:text-white group items-center justify-center flex flex-col text-white transform transition-all duration-1000 ease-in-out ${projectCategory}`
+    href=`/projects/${projectSlug}`
+>
+    <CustomImage
+        mobileImgUrl={projectImageMobileSrc}
+        desktopImgUrl={projectImageDesktopSrc}
+        imageSizes={[
+            [327, 448],
+            [358, 448],
+        ]}
+        alt={projectImageAlt}
+        classList='group-hover:blur-sm blur-none w-full shadow-md shadow-brand-black transform transition-all duration-300'
+        imgClassList='w-full h-auto max-h-[448px]'
+    />
+    <p
+        class='absolute bottom-6 left-6 z-20 block transform text-start text-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+    >
+        {projectName}
+    </p>
+    <span
+        class='absolute z-10 block h-full w-full transform bg-brand-black bg-opacity-0 bg-blend-luminosity transition-all duration-300 group-hover:bg-opacity-20'
+    ></span>
+</a>

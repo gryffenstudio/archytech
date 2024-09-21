@@ -1,0 +1,169 @@
+---
+import Hero from '../components/Hero.astro';
+import ScrollProgress from '../components/ScrollProgress.astro';
+import Layout from '../layouts/Layout.astro';
+import heroImage from '../assets/images/Studio-Hero.png';
+import heroImageSM from '../assets/images/Studio-Hero-SM.png';
+import studioArchytechImage from '../assets/images/Studio-Archytech.png';
+import studioArchytechImageSM from '../assets/images/Studio-Archytech-SM.png';
+import studioDesignImage from '../assets/images/Studio-Design.png';
+import teamHeroImage from '../assets/images/Team-Hero.png';
+import CustomImage from '../components/CustomImage.astro';
+import SectionDropdown from '../components/SectionDropdown.astro';
+import ContactUsSection from '../components/ContactUsSection.astro';
+---
+
+<Layout title='Studio - Archytech' description='Building Dreams As a Team' robots={false}>
+    <Hero heroBackgroundImgSrcList={[heroImageSM, heroImage]} alt='Projects Hero Image'>
+        <div class='hero'>
+            <h1 class='hero-h1'>Studio</h1>
+            <p class='hero-paragraph'>The foremost marketplace for designing and constructing.</p>
+        </div>
+        <div
+            class='absolute left-0 top-0 z-10 h-full w-full bg-brand-black bg-opacity-50 bg-blend-luminosity'
+        >
+        </div>
+    </Hero>
+    <main class='container'>
+        <section
+            class='flex w-full flex-col items-start justify-end space-y-10 pb-10 md:flex-row md:space-x-16 md:space-y-0 md:py-20'
+        >
+            <CustomImage
+                mobileImgUrl={studioArchytechImageSM}
+                desktopImgUrl={studioArchytechImage}
+                imageSizes={[
+                    [327, 500],
+                    [598, 993],
+                ]}
+                alt='Archytech Historical Image'
+                classList='hidden md:block w-2/3 h-auto'
+                imgClassList='max-h-[950px]'
+            />
+            <div class='relative flex flex-col space-y-10 md:w-1/2'>
+                <h2
+                    class='relative place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+                >
+                    ARCHYTECH DESIGN
+                    <span
+                        class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[20%] after:bg-brand-black'
+                    ></span>
+                </h2>
+                <p class='leading-loose text-brand-black'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <CustomImage
+                mobileImgUrl={studioArchytechImageSM}
+                desktopImgUrl={studioArchytechImage}
+                imageSizes={[
+                    [327, 500],
+                    [598, 993],
+                ]}
+                alt='Archytech Historical Image'
+                classList='w-full md:hidden'
+                imgClassList='min-w-full h-auto'
+            />
+        </section>
+        <section class='flex flex-col space-y-10 pb-10 md:pb-20'>
+            <div class='relative flex flex-col space-y-10'>
+                <h2
+                    class='relative place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+                >
+                    We build your dreams
+                    <span
+                        class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[20%] after:bg-brand-black'
+                    ></span>
+                </h2>
+                <p class='leading-loose text-brand-black'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <div class='relative flex flex-col space-y-6'>
+                <SectionDropdown
+                    header='Architecture'
+                    bodyText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                />
+                <SectionDropdown
+                    header='Interior Design'
+                    bodyText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                />
+                <SectionDropdown
+                    header='Experimental Design'
+                    bodyText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                />
+                <SectionDropdown
+                    header='Project Coordination'
+                    bodyText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                />
+                <SectionDropdown
+                    header='3D Architectural Renderings'
+                    bodyText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                />
+                <SectionDropdown
+                    header='Property Selection Architecture'
+                    bodyText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                />
+            </div>
+        </section>
+        <CustomImage
+            mobileImgUrl={studioDesignImage}
+            desktopImgUrl={studioDesignImage}
+            imageSizes={[
+                [520, 1196],
+                [520, 1196],
+            ]}
+            alt='Archytech Design Image'
+            classList='hidden max-w-full md:block '
+            imgClassList='min-w-full h-auto'
+        />
+        <section
+            class='flex flex-col items-start space-y-10 pb-10 md:flex-row md:justify-between md:space-y-0 md:py-20'
+        >
+            <p class='place-self-center text-left text-2xl text-brand-black md:w-1/2 md:pr-10'>
+                “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.”
+            </p>
+            <div class='flex flex-col space-y-6 md:w-[40%]'>
+                <a href='/team' class='relative flex w-fit items-center space-x-2 no-underline'>
+                    <h2
+                        class='relative place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+                    >
+                        Meet our team
+                        <span
+                            class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[70px] after:bg-brand-black'
+                        ></span>
+                    </h2>
+                    <span class='icon-[mynaui--arrow-right] size-7 text-brand-black'></span>
+                </a>
+                <p class='leading-loose text-brand-black'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+            </div>
+        </section>
+        <CustomImage
+            mobileImgUrl={teamHeroImage}
+            desktopImgUrl={teamHeroImage}
+            imageSizes={[
+                [520, 500],
+                [520, 1196],
+            ]}
+            alt='Archytech Design Image'
+            classList='max-w-full'
+            imgClassList='min-w-full max-h-[600px] 2xl:max-h-[800px] pb-10 md:pb-20'
+        />
+    </main>
+    <ContactUsSection />
+    <script src='../scripts/studio.ts'></script>
+</Layout>

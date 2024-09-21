@@ -1,0 +1,124 @@
+---
+const { prevUrl, nextUrl, pageLength, firstUrl, currentPage } = Astro.props;
+
+// Ensure currentPage is within valid bounds
+const normalizedCurrentPage = Math.max(1, Math.min(currentPage, pageLength));
+
+// Define the range of pages to display based on the current page
+const minPage = Math.max(1, normalizedCurrentPage - 1); // Ensure minPage is at least 1
+const maxPage = Math.min(pageLength, normalizedCurrentPage + 1); // Ensure maxPage is within pageLength
+---
+
+<div class='flex space-x-10'>
+    {
+        prevUrl && (
+            <a
+                class='flex h-10 w-10 items-center justify-center border-[1px] border-brand-black bg-white text-brand-black no-underline hover:bg-brand-purple hover:bg-opacity-50 hover:text-brand-black'
+                href={prevUrl}
+            >
+                <span class='icon-[iconamoon--arrow-down-2-thin] h-8 w-8 rotate-90' />
+            </a>
+        )
+    }
+
+    {/* Always show the first page */}
+    <a
+        href={`${firstUrl}`}
+        class={`flex no-underline ${currentPage === 1 ? 'bg-brand-purple border-0 text-white pointer-events-none' : 'bg-white text-brand-black hover:bg-brand-purple hover:bg-opacity-50 hover:text-brand-black border-[1px] border-brand-black'}  w-10 h-10 items-center justify-center`}
+    >
+        {1}
+    </a>
+
+    {/* Show the next two pages after 1 when 1 is selected */}
+    {
+        currentPage === 1 && pageLength > 3 && (
+            <>
+                {Array.from({ length: Math.min(pageLength, 3) - 1 }, (_, i) => i + 2).map((num) => (
+                    <a
+                        href={`${firstUrl}/${num}`}
+                        class={`flex h-10 w-10 items-center justify-center border-[1px] border-brand-black bg-white text-brand-black no-underline hover:bg-brand-purple hover:bg-opacity-50 hover:text-brand-black`}
+                    >
+                        {num}
+                    </a>
+                ))}
+            </>
+        )
+    }
+
+    {/* Render '...' if the current page is more than 2 spaces away from the first page */}
+    {
+        currentPage > 3 && pageLength > 4 && (
+            <span class='flex h-10 w-10 items-center justify-center'>...</span>
+        )
+    }
+
+    {/* Render pages within the range */}
+    {
+        Array.from({ length: maxPage - minPage + 1 }, (_, i) => i + minPage).map(
+            (num) =>
+                num !== 1 &&
+                num !== pageLength &&
+                ((currentPage !== 1 && currentPage !== pageLength) || pageLength <= 3) && ( // Exclude the first and last pages from the loop
+                    <a
+                        href={`${firstUrl}/${num}`}
+                        class={`flex no-underline ${currentPage === num ? 'pointer-events-none border-0 bg-brand-purple text-white' : 'border-[1px] border-brand-black bg-white text-brand-black hover:bg-brand-purple hover:bg-opacity-50 hover:text-brand-black'} h-10 w-10 items-center justify-center`}
+                    >
+                        {num}
+                    </a>
+                ),
+        )
+    }
+
+    {/* Render '...' if the current page is more than 2 spaces away from the last page */}
+    {
+        pageLength - currentPage >= 3 && pageLength > 4 && (
+            <span class='flex h-10 w-10 items-center justify-center'> ...</span>
+        )
+    }
+
+    {/* Show the previous two pages before the last page when the last page is selected */}
+    {
+        currentPage === pageLength && maxPage === pageLength && pageLength > 3 && (
+            <>
+                {Array.from(
+                    { length: Math.min(pageLength - 1, 2) },
+                    (_, i) => i + pageLength - 2,
+                ).map(
+                    (num) =>
+                        num !== 1 &&
+                        num !== pageLength && ( // Exclude the first and last pages from the loop
+                            <a
+                                href={`${firstUrl}/${num}`}
+                                class={`flex h-10 w-10 items-center justify-center border-[1px] border-brand-black bg-white text-brand-black no-underline hover:bg-brand-purple hover:bg-opacity-50`}
+                            >
+                                {num}
+                            </a>
+                        ),
+                )}
+            </>
+        )
+    }
+
+    {/* Always show the last page */}
+    {
+        pageLength !== 1 && ( // Only render if there's more than 1 page
+            <a
+                href={`${firstUrl}/${pageLength}`}
+                class={`flex no-underline ${currentPage === pageLength ? 'pointer-events-none border-0 bg-brand-purple text-white' : 'border-[1px] border-brand-black bg-white text-brand-black hover:bg-brand-purple hover:bg-opacity-50 hover:text-brand-black'} h-10 w-10 items-center justify-center`}
+            >
+                {pageLength}
+            </a>
+        )
+    }
+
+    {
+        nextUrl && (
+            <a
+                class='flex h-10 w-10 items-center justify-center border-[1px] border-brand-black bg-white text-brand-black no-underline hover:bg-brand-purple hover:bg-opacity-50 hover:text-brand-black'
+                href={nextUrl}
+            >
+                <span class='icon-[iconamoon--arrow-down-2-thin] h-8 w-8 -rotate-90' />
+            </a>
+        )
+    }
+</div>

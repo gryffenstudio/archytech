@@ -1,0 +1,14 @@
+---
+export interface Props {
+    category: string;
+    bgColor: string;
+}
+
+const { category, bgColor } = Astro.props;
+---
+
+<span
+    class=`flex items-center justify-center w-fit py-1 px-4 font-normal text-sm text-white ${bgColor}`
+>
+    {category}
+</span>

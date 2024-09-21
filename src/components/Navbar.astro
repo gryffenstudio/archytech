@@ -1,0 +1,100 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+---
+
+<nav class='fixed top-0 z-50 flex w-full items-center justify-between'>
+    <a class='ml-4 mt-10 lg:ml-10 lg:mt-14' href='/' aria-label='Home'>
+        <svg
+            id='logo'
+            class='h-[35px] w-[35px] transform fill-white transition-all duration-300 lg:h-[51px] lg:w-[43px]'
+            viewBox='0 0 43 51'
+            xmlns='http://www.w3.org/2000/svg'
+        >
+            <path
+                d='M5.08594 51H1.99219L19.3125 3H22.6875L40.0078 51H36.9141L21.1172 6.77344H20.8828L5.08594 51ZM9.46875 32.9297H32.5313V35.6484H9.46875V32.9297Z'
+            ></path>
+            <rect x='19' y='3' width='4' height='48'></rect>
+            <rect x='33' width='4' height='24' transform='rotate(90 33 0)'></rect>
+        </svg>
+    </a>
+    <div
+        id='menu-toggle'
+        class='mr-6 mt-10 grid h-6 w-6 cursor-pointer place-content-center lg:mr-10 lg:mt-14'
+    >
+        <div
+            id='menu-toggle-element'
+            class="h-[3px] w-6 transform bg-white transition-all duration-0 before:absolute before:h-[3px] before:w-6 before:-translate-y-2 before:transform before:bg-white before:transition-all before:duration-200 before:content-[''] after:absolute after:h-[3px] after:w-6 after:translate-y-2 after:transform after:bg-white after:transition-all after:duration-200 after:content-['']"
+        >
+        </div>
+    </div>
+</nav>
+<div
+    id='menu'
+    class='invisible fixed bottom-0 left-0 right-0 top-0 z-40 translate-x-full transform bg-brand-black bg-opacity-95 transition-all duration-500 ease-in-out'
+>
+    <div class='relative flex h-full flex-col items-center justify-center'>
+        <div class='flex h-auto w-full flex-col items-center justify-center space-y-6'>
+            <ul class='list-none space-y-6 text-center text-3xl'>
+                <li class='transform duration-200 hover:-translate-y-1'>
+                    <a
+                        href='/studio'
+                        class='relative cursor-pointer text-white no-underline after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-brand-purple after:transition-all after:duration-200 hover:text-white hover:after:w-full'
+                        >Studio</a
+                    >
+                </li>
+                <li class='transform duration-200 hover:-translate-y-1'>
+                    <a
+                        href='/team'
+                        class='relative cursor-pointer text-white no-underline after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-brand-purple after:transition-all after:duration-200 hover:text-white hover:after:w-full'
+                        >Team</a
+                    >
+                </li>
+                <li class='transform duration-200 hover:-translate-y-1'>
+                    <a
+                        href='/projects'
+                        class='relative cursor-pointer text-white no-underline after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-brand-purple after:transition-all after:duration-200 hover:text-white hover:after:w-full'
+                        >Projects</a
+                    >
+                </li>
+                <li class='transform duration-200 hover:-translate-y-1'>
+                    <a
+                        href='/blog'
+                        class='relative cursor-pointer text-white no-underline after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-brand-purple after:transition-all after:duration-200 hover:text-white hover:after:w-full'
+                        >Blog</a
+                    >
+                </li>
+                <li class='transform duration-200 hover:-translate-y-1'>
+                    <a
+                        class='relative cursor-pointer text-white no-underline after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-brand-purple after:transition-all after:duration-200 hover:text-white hover:after:w-full'
+                        href='/contact'>Contact</a
+                    >
+                </li>
+            </ul>
+        </div>
+        <div class='absolute bottom-20 flex space-x-6 md:right-20'>
+            <Icon
+                href='https://www.instagram.com'
+                icon='icon-[ri--instagram-line]'
+                label='Instagram Link'
+                iconColor='text-brand-black'
+                bgColor='bg-white'
+            />
+            <Icon
+                href='https://www.facebook.com'
+                icon='icon-[ri--facebook-fill]'
+                label='Facebook Link'
+                iconColor='text-brand-black'
+                bgColor='bg-white'
+            />
+            <Icon
+                href='https://www.linkedin.com'
+                icon='icon-[ri--linkedin-fill]'
+                label='LinkedIn Link'
+                iconColor='text-brand-black'
+                bgColor='bg-white'
+            />
+        </div>
+    </div>
+</div>
+<script src='../scripts/navbar.ts'></script>

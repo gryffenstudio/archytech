@@ -1,0 +1,30 @@
+---
+interface Props {
+    isHeroScrollProgress: boolean;
+    // grayHeightClass?: string[][];
+    // blackHeightClass?: string[][];
+    // whiteHeightClass?: string[];
+    barColor: string;
+    progressColor: string;
+    barHeight: string;
+    progress: string;
+}
+const {
+    isHeroScrollProgress,
+    barColor,
+    progressColor,
+    barHeight,
+    // grayHeightClass,
+    // blackHeightClass,
+    progress,
+} = Astro.props satisfies Props;
+---
+
+<div class='flex items-center space-x-6'>
+    <div class=`relative w-[2px] ${barColor} rounded-full ${barHeight}`>
+        <div class=`${progressColor} absolute w-[2px] ${progress} h-[25%] rounded-full`></div>
+    </div>
+    <p class=`${isHeroScrollProgress ? 'block' : 'hidden'} text-brand-gray`>
+        Scroll to see how we work
+    </p>
+</div>

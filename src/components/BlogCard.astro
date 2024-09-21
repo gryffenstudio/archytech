@@ -1,0 +1,72 @@
+---
+import { formatDate } from '../utils/dateUtils';
+import { getCategory, urlFor, type Post } from '../utils/sanity';
+import heroImage from '../assets/images/Blog-Hero.png';
+import heroImageMobile from '../assets/images/Blog-Hero-SM.png';
+import { Image } from 'astro:assets';
+import CustomImage from './CustomImage.astro';
+import CategoryTag from './CategoryTag.astro';
+import category from '../../schema/category';
+
+interface Props {
+    post: Post;
+}
+
+const { post } = Astro.props satisfies Props;
+
+let categoryCardData: any = { category: '', bgColor: '' };
+
+categoryCardData.category = post.category.title;
+
+switch (categoryCardData.category.toLowerCase()) {
+    case 'news':
+        categoryCardData.bgColor = 'bg-brand-purple';
+        break;
+    case 'article':
+        categoryCardData.bgColor = 'bg-red-500';
+        break;
+    case 'tips':
+        categoryCardData.bgColor = 'bg-green-500';
+        break;
+    default:
+        categoryCardData.bgColor = 'bg-brand-black';
+}
+---
+
+<article
+    class='flex h-full w-full flex-col items-center justify-center shadow-md duration-200 hover:scale-105 md:max-w-[380px]'
+>
+    <a class='h-full w-full no-underline' href=`/blog/${post.category.slug.current}/${post.slug.current}`>
+        {
+            post.cardImageMobile && post.cardImageDesktop ? (
+                <CustomImage
+                    mobileImgUrl={urlFor(post.cardImageMobile)?.url() ?? heroImage}
+                    desktopImgUrl={urlFor(post.cardImageDesktop)?.url() ?? heroImageMobile}
+                    imageSizes={[
+                        [327, 303],
+                        [380, 303],
+                    ]}
+                    alt={`${post.title} Post Image`}
+                    imgClassList='w-full h-auto'
+                />
+            ) : (
+                <CustomImage
+                    mobileImgUrl={heroImage}
+                    desktopImgUrl={heroImageMobile}
+                    imageSizes={[
+                        [327, 303],
+                        [380, 303],
+                    ]}
+                    alt={`${post.title} Post Image`}
+                    classList=''
+                />
+            )
+        }
+        <div class='flex w-full flex-col space-y-4 p-4'>
+            <CategoryTag category={categoryCardData.category} bgColor={categoryCardData.bgColor} />
+            <h2 class='text-left text-lg font-bold text-brand-black'>{post.title}</h2>
+            <p class='text-left text-brand-black'>{post.description}</p>
+            <p class='text-left text-brand-gray'>{formatDate(post._createdAt)}</p>
+        </div>
+    </a>
+</article>

@@ -1,0 +1,64 @@
+---
+import Hero from '../../components/Hero.astro';
+import ScrollProgress from '../../components/ScrollProgress.astro';
+import Layout from '../../layouts/Layout.astro';
+import heroImage from '../../assets/images/Team-Hero.png';
+import heroImageSM from '../../assets/images/Team-Hero-SM.png';
+import TeamMemberCard from '../../components/TeamMemberCard.astro';
+import ContactUsSection from '../../components/ContactUsSection.astro';
+import { getCollection } from 'astro:content';
+
+const team = await getCollection('team');
+---
+
+<Layout
+    title='Meet the Team - Archytech'
+    description='Meet our team of talented individuals with a shared goal to deliver on your project'
+    robots={false}
+>
+    <Hero heroBackgroundImgSrcList={[heroImageSM, heroImage]} alt='Team Hero Image'>
+        <div class='hero'>
+            <h1 class='hero-h1'>Team</h1>
+            <p class='hero-paragraph'>The foremost marketplace for designing and constructing.</p>
+        </div>
+        <div
+            class='absolute left-0 top-0 z-10 h-full w-full bg-brand-black bg-opacity-50 bg-blend-luminosity'
+        >
+        </div>
+    </Hero>
+    <main class='container space-y-10 py-10 md:space-y-20 md:py-20'>
+        <section class='flex flex-col space-y-8 md:w-1/2'>
+            <h2
+                class='relative place-self-start text-start text-2xl font-semibold tracking-wide text-brand-black lg:text-3xl'
+            >
+                Meet our team
+                <span
+                    class='after:absolute after:mt-2 after:block after:h-[3px] after:w-[20%] after:bg-brand-black'
+                ></span>
+            </h2>
+            <p class='leading-loose text-brand-black'>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </section>
+        <section
+            class='grid w-full grid-cols-1 justify-items-center gap-y-6 md:grid-cols-2 md:gap-x-24 lg:grid-cols-3 lg:gap-y-10'
+        >
+            {
+                team.map((member: any) => {
+                    return (
+                        <TeamMemberCard
+                            name={member.data.name}
+                            role={member.data.role}
+                            slug={member.data.slug}
+                            cardImageMobile={member.data.cardImageMobile}
+                            cardImageDesktop={member.data.cardImageDesktop}
+                        />
+                    );
+                })
+            }
+        </section>
+    </main>
+    <ContactUsSection />
+</Layout>
