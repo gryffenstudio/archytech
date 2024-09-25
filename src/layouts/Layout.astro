@@ -4,17 +4,20 @@ import Footer from '../components/Footer.astro';
 import SEO from '../components/SEO.astro';
 import '../styles/global.css';
 import type { StructuredDataInput } from '../utils/structuredData';
+import { VisualEditing } from '@sanity/astro/visual-editing';
 
 interface Props {
     title: string;
     description: string;
-    robots: boolean;
+    noRobots?: boolean;
     image?: any;
     structuredData?: StructuredDataInput[];
     showFooter?: boolean;
 }
 
-let { title, description, robots, image, structuredData, showFooter } = Astro.props;
+let { title, description, noRobots, image, structuredData, showFooter } = Astro.props;
+
+const visualEditingEnabled = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'true';
 ---
 
 <!doctype html>
@@ -34,18 +37,13 @@ let { title, description, robots, image, structuredData, showFooter } = Astro.pr
             })(window, document, 'script', 'dataLayer', 'GTM-5KPJMQKT');
         </script> -->
         <!-- End Google Tag Manager -->
-        <meta charset='UTF-8' />
-        <meta name='description' content={description} />
-        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <link rel='icon' type='image/svg+xml' href='/ArchytechLogo.svg' />
-        <meta name='generator' content={Astro.generator} />
         <SEO
             title={title}
             description={description}
             url={Astro.url}
             image={image}
             structuredData={structuredData}
-            robots={robots}
+            noRobots={noRobots ?? !visualEditingEnabled}
         />
         <title>{title}</title>
     </head>
@@ -62,5 +60,6 @@ let { title, description, robots, image, structuredData, showFooter } = Astro.pr
         <Navbar />
         <slot />
         {showFooter === undefined || showFooter === true ? <Footer /> : null}
+        <VisualEditing enabled={visualEditingEnabled} zIndex={1000} />
     </body>
 </html>

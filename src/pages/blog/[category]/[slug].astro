@@ -8,12 +8,17 @@ import { Image } from 'astro:assets';
 import { formatDate } from '../../../utils/dateUtils';
 import PortableText from '../../../components/PortableText.astro';
 
+// export const prerender = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'false';
+// For local testing since prerender mut be static
+export const prerender = false;
+
 export async function getStaticPaths() {
     const posts = await getPosts();
     return posts.map((post: Post) => ({
         params: { slug: post.slug.current, category: post.category.title.toLowerCase() },
     }));
 }
+
 
 const { slug } = Astro.params;
 
@@ -69,7 +74,6 @@ const structuredData: StructuredDataInput[] = [
 <Layout
     title={post.title}
     description={post.description}
-    robots={false}
     image={{ src: urlFor(post.cardImageDesktop)?.url(), alt: `${post.title} image` }}
     structuredData={structuredData}
 >

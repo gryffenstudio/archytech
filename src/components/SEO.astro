@@ -1,63 +1,89 @@
 ---
+// Import necessary data and utilities
 import siteData from '../data/siteData.json';
 import jsonLDGenerator from '../utils/SEOJsonLoad';
+import { buildTags } from '../utils/BuildSEOTags';
+import type { SeoProps } from '../utils/SEOTypes';
 import type { BuildDefaultStructuredDataProps, StructuredDataInput } from '../utils/structuredData';
 import buildDefaultStructuredData from '../utils/structuredData';
 
+// Define Props interface
 interface Props {
     title: string;
     description: string;
     url: URL;
-    structuredData?: StructuredDataInput[];
-    image?: any;
-    robots?: boolean;
+    structuredData?: StructuredDataInput[]; // Optional
+    image?: {
+        src?: string;
+        alt?: string;
+    }; // Optional
+    noRobots?: boolean; // Optional
 }
-const {
-    title,
-    description,
-    url = Astro.url,
-    structuredData,
-    image,
-    robots,
-} = Astro.props satisfies Props;
 
+const { title, description, url = Astro.url, structuredData, image = {}, noRobots } = Astro.props;
+
+// Build default structured data input
 const buildDefaultStructureDataInput: BuildDefaultStructuredDataProps = {
     title: title,
     url: Astro.url,
 };
 
+// Generate JSON-LD
 const jsonLD = jsonLDGenerator(
     structuredData ?? buildDefaultStructuredData(buildDefaultStructureDataInput),
 );
+
+//Build SEO props for building meta/link tags
+const seoConfig: SeoProps = {
+    title,
+    description,
+    noindex: noRobots,
+    nofollow: noRobots,
+    canonical: url.toString(),
+    openGraph: {
+        title,
+        description,
+        url: url.toString(),
+        siteName: siteData.organizationName,
+        type: url.toString().includes('blog') ? 'article' : 'website',
+        images: [
+            {
+                url: image.src ?? siteData.image.src,
+                alt: image.alt ?? siteData.image.alt,
+                secureUrl: image.src ?? siteData.image.src,
+                type: 'image/png',
+                width: 1200,
+                height: 630,
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        image: image.src ?? siteData.image.src,
+        imageAlt: image.alt ?? siteData.image.alt,
+        url: url.toString(), // Ensure this is a string
+        domain: 'archytech.netlify.app',
+        ...(siteData.twitterHandle ? { site: siteData.twitterHandle } : {}),
+        ...(siteData.twitterHandle ? { creator: siteData.twitterHandle } : {}),
+    },
+    additionalMetaTags: [],
+    additionalLinkTags: [],
+};
+
+// Generate meta tags using the buildTags function
+const metaTags = buildTags(seoConfig);
 ---
 
-<!-- SEO -->
-<link rel='canonical' href={url} />
+<!-- Head Section -->
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<link rel='icon' type='image/svg+xml' href={siteData.logo.src} />
+<meta name='generator' content={Astro.generator} />
 
-<!-- Open Graph -->
-<meta property='og:site_name' content={siteData.organizationName} />
-<meta property='og:title' content={title} />
-<meta property='og:description' content={description} />
-<meta property='og:url' content={url} />
-<meta property='og:image' content={image?.src ?? siteData.image.src} />
-<meta property='og:image:url' content={image?.src ?? siteData.image.src} />
-<meta property='og:image:secure_url' content={image?.src ?? siteData.image.src} />
-<meta property='og:image:type' content='image/png' />
-<meta property='og:image:width' content='1200' />
-<meta property='og:image:height' content='600' />
-<meta property='og:image:alt' content={image?.alt ?? siteData.image.alt} />
+<!-- Title and Meta Tags (Description, OG, Twitter, and Robots) -->
+<Fragment set:html={metaTags} />
 
-<!-- Twitter -->
-<meta name='twitter:title' content={title} />
-<meta name='twitter:description' content={description} />
-<meta name='twitter:card' content='summary_large_image' />
-<meta name='twitter:site' content='@archytech' />
-<meta name='twitter:image' content={image?.src ?? siteData.image.src} />
-<meta name='twitter:image:alt' content={image?.alt ?? siteData.image.alt} />
-<meta property='twitter:domain' content='archytech.netlify.app' />
-<meta property='twitter:url' content={url} />
-
-{robots ?? <meta name='robots' content='noindex, nofollow' />}
-
-<!-- JSON LD -->
-<script type='application/ld+json' set:html={jsonLD} />
+<!-- JSON-LD -->
+<script is:inline type='application/ld+json' set:html={jsonLD} />

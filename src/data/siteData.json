@@ -13,6 +13,7 @@
         "width": "1200",
         "height": "600"
     },
+    "twitterHandle": null,
     "organizationName": "Archytech",
     "url": "https://archytech.netlify.app",
     "websiteId": "https://archytech.netlify.app/#website",

@@ -1,11 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
-import ScrollProgress from '../../components/ScrollProgress.astro';
 import CustomImage from '../../components/CustomImage.astro';
-import Carousel, { type CarouselImage } from '../../components/Carousel';
+import Carousel from '../../components/Carousel';
 import ContactUsSection from '../../components/ContactUsSection.astro';
+
+interface Props {
+    project: CollectionEntry<'projects'>;
+}
 
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
@@ -23,7 +26,6 @@ const { project } = Astro.props;
 <Layout
     title=`${project.data.projectName} | Archytech ${project.data.category} Projects`
     description='Successful Projects Completed and In Progress for Archytech'
-    robots={false}
 >
     <Hero
         heroBackgroundImgSrcList={[project.data.heroImageMobile, project.data.heroImageDesktop]}
