@@ -8,9 +8,9 @@ import { Image } from 'astro:assets';
 import { formatDate } from '../../../utils/dateUtils';
 import PortableText from '../../../components/PortableText.astro';
 
-// export const prerender = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'false';
+export const prerender = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'false';
 // For local testing since prerender mut be static
-export const prerender = false;
+// export const prerender = false;
 
 export async function getStaticPaths() {
     const posts = await getPosts();
