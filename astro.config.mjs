@@ -33,7 +33,7 @@ export default defineConfig({
         tailwind(),
         partytown({
             config: {
-                forward: ['dataLayer.push'],
+                forward: ['dataLayer.push', 'clarity', 'clarity.q.push'],
             },
         }),
         robotsTxt(),
