@@ -1,10 +1,11 @@
 ---
 import { formatDate } from '../utils/dateUtils';
-import { urlFor, type Post } from '../utils/sanity';
 import heroImage from '../assets/images/Blog-Hero.png';
 import heroImageMobile from '../assets/images/Blog-Hero-SM.png';
 import CustomImage from './CustomImage.astro';
 import CategoryTag from './CategoryTag.astro';
+import type { Post } from '../../sanity/lib/types';
+import { urlFor } from '../../sanity/lib/utils';
 
 interface Props {
     post: Post;

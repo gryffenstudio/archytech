@@ -1,13 +1,14 @@
 ---
 import Hero from '../../../components/Hero.astro';
 import Layout from '../../../layouts/Layout.astro';
-import { getCategories, getPosts, type Category, type Post } from '../../../utils/sanity';
 import heroImage from '../../../assets/images/Blog-Hero.png';
 import heroImageSM from '../../../assets/images/Blog-Hero-SM.png';
 import BlogCard from '../../../components/BlogCard.astro';
 import FilterButton from '../../../components/FilterButton.astro';
 import Pagination from '../../../components/Pagination.astro';
 import type { Page, PaginateFunction } from 'astro';
+import { getCategories, getPosts } from '../../../../sanity/lib/queries';
+import type { Category, Post } from '../../../../sanity/lib/types';
 
 export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
     const paths: any = [];

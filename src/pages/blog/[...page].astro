@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getPosts, type Post } from '../../utils/sanity';
 import Hero from '../../components/Hero.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import Pagination from '../../components/Pagination.astro';
@@ -9,6 +8,8 @@ import heroImage from '../../assets/images/Blog-Hero.png';
 import heroImageSM from '../../assets/images/Blog-Hero-SM.png';
 import FilterButton from '../../components/FilterButton.astro';
 import type { Page, PaginateFunction } from 'astro';
+import { getPosts } from '../../../sanity/lib/queries';
+import type { Post } from '../../../sanity/lib/types';
 
 export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
     const posts = await getPosts();
