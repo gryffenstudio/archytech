@@ -10,9 +10,9 @@ import { getPosts, getPost } from '../../../../sanity/lib/queries';
 import type { Post } from '../../../../sanity/lib/types';
 import { urlFor } from '../../../../sanity/lib/utils';
 
-// export const prerender = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'false';
+export const prerender = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'false';
 // For local testing since prerender must be static
-export const prerender = false;
+// export const prerender = false;
 
 export async function getStaticPaths() {
     const posts = await getPosts();
